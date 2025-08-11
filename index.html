@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corazón Púrpura</title>
+<style>
+    body {
+        background: linear-gradient(to bottom right, #2b0036, #5b0066);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+
+    .heart-container {
+        position: relative;
+        width: min(50vw, 200px); /* Ajusta al ancho de pantalla */
+        height: min(45vw, 180px); /* Ajusta al alto de pantalla */
+    }
+
+    .heart {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: purple;
+        transform: rotate(-45deg);
+        animation: pulse 1.5s infinite;
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: purple;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -50%;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 50%;
+        top: 0;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: rotate(-45deg) scale(1);
+        }
+        50% {
+            transform: rotate(-45deg) scale(1.1);
+        }
+    }
+
+    .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: clamp(14px, 5vw, 24px); /* Escala el texto */
+        font-weight: bold;
+        text-shadow: 0 0 5px #ff99ff, 0 0 15px #ff66ff;
+        z-index: 2;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    /* Partículas decorativas */
+    .sparkle {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: float 3s infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 0.8;
+        }
+        50% {
+            transform: translateY(-20px) scale(1.2);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 0.8;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="heart-container">
+    <div class="heart"></div>
+    <div class="text">Mary Esther</div>
+</div>
+
+<script>
+    // Generar partículas decorativas
+    for (let i = 0; i < 20; i++) {
+        let sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.width = sparkle.style.height = Math.random() * 6 + 4 + "px";
+        sparkle.style.top = Math.random() * window.innerHeight + "px";
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.background = Math.random() > 0.5 ? "#fff" : "#ffb3ff";
+        sparkle.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(sparkle);
+    }
+</script>
+
+</body>
+</html>
